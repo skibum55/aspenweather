@@ -33,32 +33,20 @@ newtable = re.sub(r"[ \t]+", ',', table)
 splittable=table.splitlines()
 divider_index = [i for i, item in enumerate(splittable) if item.endswith('----')][0]+1
 str_list = list(filter(None, splittable[divider_index:]))
-for idx, val in enumerate(str_list): str_list[idx]=val[3:]
 temps= list(filter(None, splittable[:divider_index-1]))
-for idx, val in enumerate(temps): temps[idx]=val[3:]
 #divider_index = [i for i, item in enumerate(str_list) if item.endswith('----')][0]+1
 #headers=str_list[:divider_index-1]
 #http://stackoverflow.com/questions/12866631/python-split-a-string-with-at-least-2-whitespaces
 temp_headers = []
-#for i in temps: temp_headers.append(re.split(r'\s{2,}',i))
+for i in temps: temp_headers.append(re.split(r'\s{2,}',i))
 n=8
-#for j in temps: temp_headers.append([j[i:i+n] for i in range(0, len(j), n)])
+for j in temps: temp_headers.append([j[i:i+n] for i in range(0, len(j), n)])
 #http://stackoverflow.com/questions/1277278/python-zip-like-function-that-pads-to-longest-length
-#http://www.saltycrane.com/blog/2008/04/how-to-use-pythons-enumerate-and-zip-to/
-#http://stackoverflow.com/questions/11806559/removing-first-x-characters-from-string
 import itertools
-#alist=temp_headers[0]
-#blist=temp_headers[1]
-#clist=temp_headers[2]
-#http://stackoverflow.com/questions/9475241/split-python-string-every-nth-character
-thing3=list(map(''.join, zip(*[iter(temps[2])]*n)))
-thing2=list(map(''.join, zip(*[iter(temps[1])]*n)))
-thing=list(map(''.join, zip(*[iter(temps[0])]*n)))
-myheaders=list(zip(thing,thing2,thing3))
-for i in myheaders: ''.join(i)
-#for i in thing3: print(i)
-mylist = list(itertools.zip_longest(thing,thing2,thing3))
-#mylist = list(itertools.zip_longest(alist,blist,clist))
+alist=temp_headers[0]
+blist=temp_headers[1]
+clist=temp_headers[2]
+mylist = list(itertools.zip_longest(alist,blist,clist))
 #for i in temps: headers=i.split()
 tempvar=[]
 for i in str_list[divider_index:]:
